@@ -1,13 +1,5 @@
-<?php
-
-    if (!isset($_GET["q"])) {
-        $_GET["q"] = "Pikaahhh";
-    }
-
-?>
-
 <script>
-    let username = "<?php echo $_GET["q"]?>";
+    let username = "Pikaahhh";
 
     const userReq = new XMLHttpRequest();
     userReq.onload = function() {
