@@ -4,28 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        let username = "Pikaahhh";
+    
+        const userReq = new XMLHttpRequest();
+        userReq.onload = function() {
+            user = JSON.parse(this.responseText);
+            let uuid = user.uuid;
+        };
+        userReq.open("GET", "https://api.ashcon.app/mojang/v2/user/" + username)
+        userReq.send();
+    
+        const profileReq = new XMLHttpRequest();
+        profileReq.onload = function() {
+            user = JSON.parse(this.responseText);
+            let uuid = user.uuid;
+        };
+        profileReq.open("GET", "https://api.hypixel.net/v2/skyblock/profiles?key=" + API_KEY + "&uuid=" + username)
+        profileReq.send();
+    </script>
 </head>
 <body>
-    
+    <h1 id="test"></h1>
 </body>
 </html>
-<script>
-    let username = "Pikaahhh";
-
-    const userReq = new XMLHttpRequest();
-    userReq.onload = function() {
-        user = JSON.parse(this.responseText);
-        let uuid = user.uuid;
-    };
-    userReq.open("GET", "https://api.ashcon.app/mojang/v2/user/" + username)
-    userReq.send();
-
-    const profileReq = new XMLHttpRequest();
-    profileReq.onload = function() {
-        user = JSON.parse(this.responseText);
-        let uuid = user.uuid;
-    };
-    profileReq.open("GET", "https://api.hypixel.net/v2/skyblock/profiles?key=" + API_KEY + "&uuid=" + username)
-    profileReq.send();
-</script>
-<h1 id="test"></h1>
