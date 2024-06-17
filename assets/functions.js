@@ -1,4 +1,4 @@
-api = ${{ secrets.API_KEY }};
+api = "TEMP";
 
 function search() {
     input = document.getElementById("username");
