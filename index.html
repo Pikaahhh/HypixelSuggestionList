@@ -3,28 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        let username = "Pikaahhh";
-    
-        const userReq = new XMLHttpRequest();
-        userReq.onload = function() {
-            user = JSON.parse(this.responseText);
-            let uuid = user.uuid;
-        };
-        userReq.open("GET", "https://api.ashcon.app/mojang/v2/user/" + username)
-        userReq.send();
-    
-        const profileReq = new XMLHttpRequest();
-        profileReq.onload = function() {
-            user = JSON.parse(this.responseText);
-            let uuid = user.uuid;
-        };
-        profileReq.open("GET", "https://api.hypixel.net/v2/skyblock/profiles?key=" + API_KEY + "&uuid=" + username)
-        profileReq.send();
-    </script>
+    <title>Profile Viewer | Home</title>
+    <link rel="stylesheet" href="assets/default.css">
+    <link rel="stylesheet" href="assets/fonts.css">
+    <script src="assets/functions.js"></script>
 </head>
 <body>
-    <h1 id="test"></h1>
+    <div class="navigation">
+        <a><img class="icon" src="assets/home.png"></a>
+        <a><img class="icon-final" src="assets/search.png"></a>
+    </div>
+    <div class="main center">
+        <span style="font-size: 22px;" class="white shadow">Hypixel Skyblock Profile Viewer</span><br>
+        <input class="search" id="username" placeholder="Search for a username..."></input><button class="button" onclick="search()">Search</button><br>
+        <span style="font-size: 13px;" class="red shadow" id="error"></span>
+    </div>
 </body>
 </html>

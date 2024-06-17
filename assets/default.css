@@ -1,0 +1,80 @@
+body {
+    background-color: #060606;
+}
+
+.navigation {
+    background-color: #28282B;
+    border: 2px solid #26282A;
+    border-radius: 8px;
+    padding: 12px;
+    width: 24px;
+    height: 67px;
+    float: left;
+}
+
+.icon {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.icon-final {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    width: 100%;
+}
+
+.icon:hover, .icon-final:hover {
+    filter: brightness(0) saturate(100%) invert(46%) sepia(64%) saturate(1641%) hue-rotate(145deg) brightness(91%) contrast(101%);
+}
+
+.main {
+    background-color: #28282B;
+    border: 2px solid #26282A;
+    border-radius: 8px;
+    padding: 12px;
+    float: left;
+    margin-left: 8px;
+}
+
+.main.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.search {
+    padding: 8px;
+    border-radius: 8px 0px 0px 8px;
+    font-family: Minecraftia;
+    width: 350px;
+    margin-top: 8px;
+    border: none;
+    outline: none;
+}
+
+.button {
+    padding: 8px;
+    font-family: Minecraftia;
+    border-radius: 0px 8px 8px 0px;
+    border: none;
+}
+
+.button:hover {
+    background-color: #00AAAA;
+}
+
+.link {
+    text-decoration: none;
+    transition: 0.3s;
+    color: #AAAAAA;
+    text-shadow: 3px 3px #2A2A2A;
+}
+
+.link:hover {
+    color: #00AAAA;
+    text-shadow: 3px 3px #002A2A;
+    transition: 0.3s;
+}
