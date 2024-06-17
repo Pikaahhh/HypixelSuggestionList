@@ -1,4 +1,4 @@
-api = "f0e0f6f9-1d74-44e7-abaf-47a134a5a8f0";
+api = API_KEY;
 
 function search() {
     input = document.getElementById("username");
