@@ -1,4 +1,4 @@
-api = API_KEY;
+api = ${{ secrets.API_KEY }};
 
 function search() {
     input = document.getElementById("username");
