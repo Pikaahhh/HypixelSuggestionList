@@ -3,20 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Viewer | Home</title>
-    <link rel="stylesheet" href="assets/default.css">
-    <link rel="stylesheet" href="assets/fonts.css">
+    <title>SkyBlock Nerds GUI CMD Generator</title>
+    <link rel="stylesheet" href="assets/styles.css">
     <script src="assets/functions.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+        input, span, option, select, legend, label, div {
+            font-family: Raleway;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <div class="navigation">
-        <a><img class="icon" src="assets/home.png"></a>
-        <a><img class="icon-final" src="assets/search.png"></a>
-    </div>
-    <div class="main center">
-        <span style="font-size: 22px;" class="white shadow">Hypixel Skyblock Profile Viewer</span><br>
-        <input class="search" id="username" placeholder="Search for a username..."></input><button class="button" onclick="search()">Search</button><br>
-        <span style="font-size: 13px;" class="red shadow" id="error"></span>
+    <fieldset>
+        <legend> Standard GUI Settings </legend>
+        <input class="input" id="container_name" placeholder="GUI Title... (eg. SkyBlock Menu)"><br>
+        <input class="input" type="number" id="rows" min="1" max="6" placeholder="Rows... (Min 1, Max 6)"><br>
+        <span>Show Publicly? </span><select id="show_publicly">
+            <option value="True">True</option>
+            <option selected value="False">False</option>
+        </select>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend> Items <i></i></legend>
+        <input style="border-radius: 8px 0px 0px 8px;" class="input" id="items" placeholder="Item Names...">    <input style="border-radius: 0px 8px 8px 0px;" class="input" id="nbt" placeholder="Item NBT (For Player Heads)"><br>
+        <input class="input" id="item_loc" placeholder="Item Location..."><br>
+        <input type="checkbox" id="enchant" name="enchant" value="enchant">
+        <label for="enchant"> Enchanted?</label>
+        <br>
+        <button style="margin-top: 8px;" onclick="addItem()">Add Item</button><span id="action" style="color: green; margin-left: 8px; font-size: 14px;"></span>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend> Item List <i></i></legend>
+        <div id="display_list">
+            Your list of items will display here!
+        </div>
+    </fieldset>
+    <br>
+    <span>Generated Command:</span>
+    <div class="code">
+        <code id="output"></code>
+        <img onclick="copyCommand()" class="copy" src="assets/copy.png" style="width: 32px;">
     </div>
 </body>
 </html>
