@@ -6,6 +6,7 @@ function addItem() {
     let location = document.getElementById("item_loc").value;
     let enchant = document.getElementById("enchant");
     let nbt = document.getElementById("nbt").value;
+    let stack = "," + document.getElementById("item_stack").value;
 
     if (item == "") {
         document.getElementById("action").innerHTML = "Missing Item Name!";
@@ -22,8 +23,8 @@ function addItem() {
         } else {
             var nbtme = "," + nbt.toString();
         }
-        item_list += item + nbtme + enchantMe + ":" + location + "%%";
-        var ze_item = item + nbtme + enchantMe + ":" + location;
+        item_list += item + nbtme + enchantMe + ":" + location + stack + "%%";
+        var ze_item = item + nbtme + enchantMe + ":" + location + stack;
         console.log(ze_item);
         display_list += "<span id='" + ze_item + "'>" + ze_item + "</span><br>";
         document.getElementById("items").value = "";
