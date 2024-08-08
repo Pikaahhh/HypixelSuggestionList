@@ -97,7 +97,7 @@ function updateCommand() {
 function copyCommand() {
     let output = document.getElementById("output");
     navigator.clipboard.writeText(output.innerHTML);
-    document.getElementById("copied").innerHTML = "Successfully copied '" + output.innerHTML + "'.";
+    document.getElementById("copied").innerHTML = "<i>Successfully copied '" + output.innerHTML + "'.</i>";
 }
 
 setInterval(updateCommand, 500);
