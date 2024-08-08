@@ -15,21 +15,25 @@ function addItem() {
         document.getElementById("action").innerHTML = "Missing Item Location!";
     } else {
         // Parse the location input to handle ranges and single numbers
-        const ranges = location.split(', ');
+        const ranges = location.split(/,\s*/); // Split by comma and optional space
         const locationList = [];
 
-        ranges.forEach(item => {
-            if (item.includes('-')) {
-                const [start, end] = item.split('-').map(Number);
-                for (let i = start; i <= end; i++) {
-                    locationList.push(i);
+        ranges.forEach(range => {
+            if (range.includes('-')) {
+                const [start, end] = range.split('-').map(Number);
+                if (Number.isInteger(start) && Number.isInteger(end) && start <= end) {
+                    for (let i = start; i <= end; i++) {
+                        locationList.push(i);
+                    }
                 }
             } else {
-                locationList.push(Number(item));
+                const number = Number(range);
+                if (Number.isInteger(number)) {
+                    locationList.push(number);
+                }
             }
         });
 
-        // Convert locationList to a single string with square brackets around the list
         const locationString = `[${locationList.join(',')}]`;
 
         if (enchant.checked == true) {
@@ -43,10 +47,8 @@ function addItem() {
             var nbtme = "," + nbt.toString();
         }
 
-        // Update item_list to match the desired output format
         item_list += item + ":" + locationString + stack + "%%";
 
-        // Update display_list with the new item and its delete button
         let nbtmeFormatted = nbtme.replaceAll(",", "").replaceAll("", "None!");
         let enchantMeFormatted = enchantMe.replaceAll(",enchant", "ENCHANTED ");
         let ze_item = `<u>${enchantMeFormatted}${item.replaceAll("_", " ").toUpperCase()} x${stack.replaceAll(",", "")}</u> AT SLOT <u>${locationString} | Additional NBT: ${nbtmeFormatted}</u>`;
