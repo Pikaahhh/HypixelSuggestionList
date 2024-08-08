@@ -29,7 +29,7 @@ function addItem() {
         });
 
         // Convert locationList to a single string with square brackets around the list
-        const locationString = `[${locationList.join(', ')}]`;
+        const locationString = `[${locationList.join(',')}]`;
 
         if (enchant.checked == true) {
             var enchantMe = ",enchant";
@@ -42,7 +42,8 @@ function addItem() {
             var nbtme = "," + nbt.toString();
         }
 
-        item_list += item + nbtme + enchantMe + ":" + locationString + stack + "%%";
+        // Update item_list to match the desired output format
+        item_list += item + ":" + locationString + stack + "%%";
         let nbtmeFormatted = nbtme.replaceAll(",", "").replaceAll("", "None!");
         let enchantMeFormatted = enchantMe.replaceAll(",enchant", "ENCHANTED ");
         var ze_item = "<u>" + enchantMeFormatted + item.replaceAll("_", " ").toUpperCase() + " x" + stack.replaceAll(",", "") + "</u> AT SLOT <u>" + locationString + " | Additional NBT: " + nbtmeFormatted + "</u>";
