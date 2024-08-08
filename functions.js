@@ -1,3 +1,11 @@
+function closeGuide() {
+    document.getElementById("overlay").style.display = "none";
+}
+
+function openGuide() {
+    document.getElementById("overlay").style.display = "block";
+}
+
 var item_list = "";
 var display_list = [];
 
@@ -51,8 +59,8 @@ function addItem() {
 
         let nbtmeFormatted = nbtme.replaceAll(",", "").replaceAll("", "None!");
         let enchantMeFormatted = enchantMe.replaceAll(",enchant", "ENCHANTED ");
-        let ze_item = `<u>${enchantMeFormatted}${item.replaceAll("_", " ").toUpperCase()} x${stack.replaceAll(",", "")}</u> AT SLOT <u>${locationString} | Additional NBT: ${nbtmeFormatted}</u>`;
-        let deleteButton = `<span class="delete-btn" onclick="removeItem('${item}', '${locationString}')">Delete</span>`;
+        let ze_item = `<span style='color: black'><u>${enchantMeFormatted}${item.replaceAll("_", " ").toUpperCase()} x${stack.replaceAll(",", "")}</u> placed at slot <u>${locationString}</u></span>`;
+        let deleteButton = `<a href='#' style='color: red; float: right; font-weight: bold;' class="delete-btn" onclick="removeItem('${item}', '${locationString}')">Delete</a>`;
         display_list.push(`<span id='${item}:${locationString}'>${ze_item} ${deleteButton}</span><br>`);
         
         document.getElementById("items").value = "";
@@ -77,7 +85,7 @@ function updateDisplayList() {
     const displayElement = document.getElementById("display_list");
     
     if (display_list.length === 0) {
-        displayElement.innerHTML = "Your list of items will display here!";
+        displayElement.innerHTML = "<span style='color: black'>Your list of items will appear here!</span>";
     } else {
         displayElement.innerHTML = display_list.join("");
     }
@@ -88,7 +96,11 @@ function updateCommand() {
     let output = document.getElementById("output");
     let container_name = document.getElementById("container_name").value;
     let size = document.getElementById("rows").value;
-    let view_type = document.getElementById("show_publicly").value;
+    if (document.getElementById("show_publicly").checked) {
+        var view_type = "True";
+    } else {
+        var view_type = "False";
+    }
 
     output.innerHTML = "/gen2 inventory rows:" + size + " slots_per_row:9 container_name:" + container_name + " draw_border:True show_publicly:" + view_type + " inventory_string:" 
     + item_list;
