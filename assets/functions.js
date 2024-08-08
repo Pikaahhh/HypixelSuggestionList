@@ -8,28 +8,26 @@ function addItem() {
     let nbt = document.getElementById("nbt").value;
     let stack = "," + document.getElementById("item_stack").value;
 
-    const ranges = location.split(', ');
-
-    const numberList = [];
-
-    ranges.forEach(item => {
-        if (item.includes('-')) {
-            const [start, end] = item.split('-').map(Number);
-            for (let i = start; i <= end; i++) {
-                numberList.push(i);
-            }
-        } else {
-            numberList.push(Number(item));
-        }
-    });
-
-    console.log(numberList);
-
     if (item == "") {
         document.getElementById("action").innerHTML = "Missing Item Name!";
     } else if (location == "") {
         document.getElementById("action").innerHTML = "Missing Item Location!";
     } else {
+        // Parse the location input to handle ranges and single numbers
+        const ranges = location.split(', ');
+        const locationList = [];
+
+        ranges.forEach(item => {
+            if (item.includes('-')) {
+                const [start, end] = item.split('-').map(Number);
+                for (let i = start; i <= end; i++) {
+                    locationList.push(i);
+                }
+            } else {
+                locationList.push(Number(item));
+            }
+        });
+
         if (enchant.checked == true) {
             var enchantMe = ",enchant";
         } else {
@@ -40,15 +38,19 @@ function addItem() {
         } else {
             var nbtme = "," + nbt.toString();
         }
-        item_list += item + nbtme + enchantMe + ":" + numberList + stack + "%%";
-        nbtme = nbtme.replaceAll(",", "").replaceAll("", "None!");
-        enchantMe = enchantMe.replaceAll(",enchant", "ENCHANTED ");
-        var ze_item = "<u>" + enchantMe + item.replaceAll("_"," ").toUpperCase() + " x" + stack.replaceAll(",","") + "</u> AT SLOT <u>" + numberList + " | Additional NBT: "+ nbtme + "</u>";
-        console.log(ze_item);
-        display_list += "<span id='" + ze_item + "'>" + ze_item + "</span><br>";
+
+        locationList.forEach(loc => {
+            item_list += item + nbtme + enchantMe + ":" + loc + stack + "%%";
+            let nbtmeFormatted = nbtme.replaceAll(",", "").replaceAll("", "None!");
+            let enchantMeFormatted = enchantMe.replaceAll(",enchant", "ENCHANTED ");
+            var ze_item = "<u>" + enchantMeFormatted + item.replaceAll("_", " ").toUpperCase() + " x" + stack.replaceAll(",", "") + "</u> AT SLOT <u>" + loc + " | Additional NBT: " + nbtmeFormatted + "</u>";
+            console.log(ze_item);
+            display_list += "<span id='" + ze_item + "'>" + ze_item + "</span><br>";
+        });
+
         document.getElementById("items").value = "";
         document.getElementById("item_loc").value = "";
-        document.getElementById("action").innerHTML = "Sucessfully added '" + item + ":" + numberList + "'";
+        document.getElementById("action").innerHTML = "Successfully added '" + item + ":" + location + "'";
         document.getElementById("display_list").innerHTML = display_list;
     }
 }
