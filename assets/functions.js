@@ -8,7 +8,7 @@ function addItem() {
     let nbt = document.getElementById("nbt").value;
     let stack = "," + document.getElementById("item_stack").value;
 
-    const ranges = stack.split(', ');
+    const ranges = location.split(', ');
 
     const numberList = [];
 
@@ -40,15 +40,15 @@ function addItem() {
         } else {
             var nbtme = "," + nbt.toString();
         }
-        item_list += item + nbtme + enchantMe + ":" + location + stack + "%%";
+        item_list += item + nbtme + enchantMe + ":" + numberList + stack + "%%";
         nbtme = nbtme.replaceAll(",", "").replaceAll("", "None!");
         enchantMe = enchantMe.replaceAll(",enchant", "ENCHANTED ");
-        var ze_item = "<u>" + enchantMe + item.replaceAll("_"," ").toUpperCase() + " x" + stack.replaceAll(",","") + "</u> AT SLOT <u>" + location + " | Additional NBT: "+ nbtme + "</u>";
+        var ze_item = "<u>" + enchantMe + item.replaceAll("_"," ").toUpperCase() + " x" + stack.replaceAll(",","") + "</u> AT SLOT <u>" + numberList + " | Additional NBT: "+ nbtme + "</u>";
         console.log(ze_item);
         display_list += "<span id='" + ze_item + "'>" + ze_item + "</span><br>";
         document.getElementById("items").value = "";
         document.getElementById("item_loc").value = "";
-        document.getElementById("action").innerHTML = "Sucessfully added '" + item + ":" + location + "'";
+        document.getElementById("action").innerHTML = "Sucessfully added '" + item + ":" + numberList + "'";
         document.getElementById("display_list").innerHTML = display_list;
     }
 }
