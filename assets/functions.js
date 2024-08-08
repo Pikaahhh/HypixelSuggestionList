@@ -56,7 +56,7 @@ function addItem() {
         document.getElementById("items").value = "";
         document.getElementById("item_loc").value = "";
         document.getElementById("action").innerHTML = "Successfully added '" + item + ":" + location + "'";
-        document.getElementById("display_list").innerHTML = display_list.join("");
+        updateDisplayList();
     }
 }
 
@@ -67,8 +67,18 @@ function removeItem(item, location) {
     // Update item_list to remove the item
     item_list = item_list.split('%%').filter(entry => !entry.includes(`${item}:${location}`)).join('%%');
     // Update the displayed list
-    document.getElementById("display_list").innerHTML = display_list.join("");
-    // Update the command output
+    updateDisplayList();
+}
+
+// Update the display list content and restore default message if empty
+function updateDisplayList() {
+    const displayElement = document.getElementById("display_list");
+    
+    if (display_list.length === 0) {
+        displayElement.innerHTML = "Your list of items will display here!";
+    } else {
+        displayElement.innerHTML = display_list.join("");
+    }
     updateCommand();
 }
 
