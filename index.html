@@ -3,59 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyBlock Nerds GUI CMD Generator</title>
+    <title>Document</title>
     <link rel="stylesheet" href="assets/styles.css">
     <script src="assets/functions.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
-        input, span, option, select, legend, label, div {
-            font-family: Raleway;
-            font-weight: bold;
-        }
-
-        .delete-btn {
-            cursor: pointer;
-            color: red;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-    </style>
 </head>
 <body>
-    <fieldset>
-        <legend> Standard GUI Settings </legend>
-        <input class="input" id="container_name" placeholder="GUI Title... (eg. SkyBlock Menu)"><br>
-        <input class="input" type="number" id="rows" min="1" max="6" placeholder="Rows... (Min 1, Max 6)"><br>
-        <span>Show Publicly? </span><select id="show_publicly">
-            <option value="True">True</option>
-            <option selected value="False">False</option>
-        </select>
-    </fieldset>
-    <br>
-    <fieldset>
-        <legend> Items <i></i></legend>
-        <input style="border-radius: 8px 0px 0px 8px; border-right: none;" class="input" id="items" placeholder="Item Names..." list="item_names" ><input style="border-radius: 0px; width: 8px; border-left: none; border-right: none;" class="input" value="x" style="text-align: right;" readonly><input style="border-radius: 0px; width: 25px; border-left: none;" type="number" min="1" max="64" class="input" value="1" id="item_stack" placeholder="Item Stack Number...">    <input style="border-radius: 0px 8px 8px 0px;" class="input" id="nbt" placeholder="Item NBT (For Player Heads)"><br>
-        <input class="input" id="item_loc" placeholder="Item Slot Number..."><br>
-        <input type="checkbox" id="enchant" name="enchant" value="enchant">
-        <label for="enchant"> Enchanted?</label>
-        <br>
-        <button style="margin-top: 8px;" onclick="addItem()">Add Item</button><span id="action" style="color: green; margin-left: 8px; font-size: 14px;"></span>
-    </fieldset>
-    <br>
-    <fieldset>
-        <legend> Item List <i></i></legend>
-        <div id="display_list" style="font-size: 12px;">
-            Your list of items will display here!
+    <div class="overlay" style="display:none;" id="overlay">
+        <div class="overlay-content container">
+            <a href="#" onclick="closeGuide()" class="top-right guide" style="font-size: 36px; top: 4px; text-decoration: none;">×</a>
+            <h3 style="text-align: center;">Inventory Generation Guide</h3>
+            <p><b>Standard Container Information</b><br>When creating a container, you must have a name and amount of rows set, otherwise the command will not work. Your number of rows can only be between 1 and 6, since in vanilla Minecraft that is the maximum amount of slots a container can ever be.</p>
+            <p><b>Item Names</b><br>When creating an item, you can search for a specific item name rather than remembering it off the top of your head. For example, searching "sword" will display all sword options.</p>
+            <p><b>Placing Items In Slots</b><br>When placing items into slots, you can either type in each slot manually, or create a range of slots that this item would occupy. You can do this by typing "1-10". Obviously you would replace the 1 and 10 with your selection of numbers.</p>
+            <p><b>Item NBT</b><br>When creating item skulls using the inventory generator, you can put NBT into the NBT field in order to add a skin to that player head.</p>
         </div>
-    </fieldset>
-    <br>
-    <span>Generated Command:</span>
-    <div class="code">
-        <code id="output"></code>
-        <img onclick="copyCommand()" class="copy" src="assets/copy.png" style="width: 32px;">
     </div>
-    <span id="copied" style="color: green; font-size: 14px;"></span>
+    <span class="title"><span style="font-size: 36px;"><b><u>Inventory Generation Helper</u></b></span><br><i>For SkyBlock Nerds</i></span>
+    <div class="center">
+        <div class="content">
+            <a href="#" style="text-decoration: none;" class="top-right guide" onclick="openGuide()">🛈</a>
+            <fieldset style="width: 92%; border: solid black 2px; text-align: left;">
+                <legend style="color: black;"> <b>Standard GUI Settings</b> </legend>
+                <div style="float: left; text-align: left; color: black">
+                    <label><b>Container Name (eg. SkyBlock Menu)</b></label><br>
+                    <input id="container_name" class="input" style="float: left;">
+                </div>
+                <div style="float: left; text-align: left; color: black; margin-left: 16px;">
+                    <label><b>Row Count (Between 1 & 6)</b></label><br>
+                    <input id="rows" type="number" min="1" max="6" class="input" style="float: left;">
+                </div>
+                <div style="float: left; text-align: left; color: black; margin-top: 15px; margin-left: 35px;">
+                    <input type="checkbox" name="public" id="show_publicly" value="off">
+                    <label for="public"> Show Publicly?</label>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset style="width: 92%; border: solid black 2px; text-align: left;">
+                <legend style="color: black;"> <b>Item Creation</b> </legend>
+                <div style="float: left; text-align: left; color: black">
+                    <label><b>Item ID (eg. diamond_sword)</b></label><br>
+                    <input list="item_names" id="items" class="input" style="float: left; border-radius: 8px 0px 0px 8px; border-right: 0;">
+                    <input class="input" readonly value="x" style="float: left; width: 7px; border-radius: 0px; border-left: none; border-right: none;">
+                    <input id="item_stack" class="input" value="1" type="number" min="1" max="64" style="float: left; width: 30px; border-radius: 0px 8px 8px 0px; border-left: none">
+                </div>
+                <div style="float: left; text-align: left; color: black; margin-left: 16px;">
+                    <label><b>Slot Selection (Up to 54)</b></label><br>
+                    <input id="item_loc" class="input" style="float: left; width: 247px;">
+                </div>
+                <div style="float: left; text-align: left; color: black; margin-top: 15px; margin-left: 35px;">
+                    <input id="enchant" type="checkbox" name="public" value="enchant">
+                    <label for="enchant"> Enchant Item?</label>
+                </div>
+                <br>
+                <div style="float: left; text-align: left; color: black; margin-top: 15px;">
+                    <label><b>NBT Data (Optional!)</b></label><br>
+                    <input id="nbt" style="width: 720px; float: left; margin-right: 8px;" class="input">
+                    <button style="float: left; margin-top: 4px; height: 27px; border-radius: 8px; border: green 2px solid; background-color: greenyellow;" onclick="addItem()"><b>Add Item</b></button><br><br><span id="action" style="color: green; font-size: 14px; font-weight: bold;"></span>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset style="width: 92%; border: solid black 2px; text-align: left; margin-bottom: 8px;">
+                <legend style="color: black;"> <b>Item List</b> </legend>
+                <div id="display_list" style="font-size: 12px;">
+                    <h7 style="color: black;">Your added items will appear here!</h7>
+                </div>
+            </fieldset>
+            <h7 id="output" style="color: black; font-size: 12px;"></h7> 
+        </div>
+    </div>
     <datalist id="item_names">
     </datalist>
 </body>
