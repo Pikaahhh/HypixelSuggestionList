@@ -24,7 +24,9 @@ function addItem() {
             var nbtme = "," + nbt.toString();
         }
         item_list += item + nbtme + enchantMe + ":" + location + stack + "%%";
-        var ze_item = item + nbtme + enchantMe + ":" + location + stack;
+        nbtme = nbtme.replaceAll(",", "").replaceAll("", "None!");
+        enchantMe = enchantMe.replaceAll(",enchant", "ENCHANTED ");
+        var ze_item = "<u>" + enchantMe + item.replaceAll("_"," ").toUpperCase() + " x" + stack.replaceAll(",","") + "</u> AT SLOT <u>" + location + " | Additional NBT: "+ nbtme + "</u>";
         console.log(ze_item);
         display_list += "<span id='" + ze_item + "'>" + ze_item + "</span><br>";
         document.getElementById("items").value = "";
@@ -51,3 +53,16 @@ function copyCommand() {
 }
 
 setInterval(updateCommand, 500);
+var dataset = "";
+
+const xhttp = new XMLHttpRequest();
+xhttp.onload = function() {
+    let item = JSON.parse(this.responseText);
+    for (i=0; i < item.length; i++) {
+        dataset += "<option value='"+ item[i].name +"'>" + item[i].displayName + "</option>";
+    }
+    document.getElementById("item_names").innerHTML = dataset;
+}
+xhttp.open("GET", "assets/items.json");
+xhttp.send();
+
