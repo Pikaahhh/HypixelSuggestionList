@@ -1,7 +1,6 @@
 var item_list = "";
-var display_list = [];
+var display_list = "";
 
-// Add item to the list
 function addItem() {
     let item = document.getElementById("items").value;
     let location = document.getElementById("item_loc").value;
@@ -45,32 +44,20 @@ function addItem() {
 
         // Update item_list to match the desired output format
         item_list += item + ":" + locationString + stack + "%%";
-
-        // Update display_list with the new item and its delete button
         let nbtmeFormatted = nbtme.replaceAll(",", "").replaceAll("", "None!");
         let enchantMeFormatted = enchantMe.replaceAll(",enchant", "ENCHANTED ");
-        let ze_item = `<u>${enchantMeFormatted}${item.replaceAll("_", " ").toUpperCase()} x${stack.replaceAll(",", "")}</u> AT SLOT <u>${locationString} | Additional NBT: ${nbtmeFormatted}</u>`;
-        let deleteButton = `<span class="delete-btn" onclick="removeItem('${item}', '${locationString}')">Delete</span>`;
-        display_list.push(`<span id='${item}:${locationString}'>${ze_item} ${deleteButton}</span><br>`);
-        
+        var ze_item = "<u>" + enchantMeFormatted + item.replaceAll("_", " ").toUpperCase() + " x" + stack.replaceAll(",", "") + "</u> AT SLOT <u>" + locationString + " | Additional NBT: " + nbtmeFormatted + "</u>";
+        console.log(ze_item);
+        display_list += "<span id='" + ze_item + "'>" + ze_item + "</span><br>";
+
         document.getElementById("items").value = "";
         document.getElementById("item_loc").value = "";
         document.getElementById("action").innerHTML = "Successfully added '" + item + ":" + location + "'";
-        document.getElementById("display_list").innerHTML = display_list.join("");
+        document.getElementById("display_list").innerHTML = display_list;
     }
 }
 
-// Remove item from the list
-function removeItem(item, location) {
-    // Filter out the item to be removed from the display_list
-    display_list = display_list.filter(entry => !entry.includes(`${item}:${location}`));
-    // Update item_list to remove the item
-    item_list = item_list.split('%%').filter(entry => !entry.includes(`${item}:${location}`)).join('%%');
-    // Update the displayed list
-    document.getElementById("display_list").innerHTML = display_list.join("");
-    // Update the command output
-    updateCommand();
-}
+
 
 function updateCommand() {
     let output = document.getElementById("output");
@@ -101,3 +88,4 @@ xhttp.onload = function() {
 }
 xhttp.open("GET", "assets/items.json");
 xhttp.send();
+
