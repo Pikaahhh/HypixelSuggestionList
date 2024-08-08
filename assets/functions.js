@@ -28,6 +28,9 @@ function addItem() {
             }
         });
 
+        // Convert locationList to a single string with square brackets around the list
+        const locationString = `[${locationList.join(', ')}]`;
+
         if (enchant.checked == true) {
             var enchantMe = ",enchant";
         } else {
@@ -39,14 +42,12 @@ function addItem() {
             var nbtme = "," + nbt.toString();
         }
 
-        locationList.forEach(loc => {
-            item_list += item + nbtme + enchantMe + ":[" + loc + "]" + stack + "%%";
-            let nbtmeFormatted = nbtme.replaceAll(",", "").replaceAll("", "None!");
-            let enchantMeFormatted = enchantMe.replaceAll(",enchant", "ENCHANTED ");
-            var ze_item = "<u>" + enchantMeFormatted + item.replaceAll("_", " ").toUpperCase() + " x" + stack.replaceAll(",", "") + "</u> AT SLOT <u>[" + loc + "] | Additional NBT: " + nbtmeFormatted + "</u>";
-            console.log(ze_item);
-            display_list += "<span id='" + ze_item + "'>" + ze_item + "</span><br>";
-        });
+        item_list += item + nbtme + enchantMe + ":" + locationString + stack + "%%";
+        let nbtmeFormatted = nbtme.replaceAll(",", "").replaceAll("", "None!");
+        let enchantMeFormatted = enchantMe.replaceAll(",enchant", "ENCHANTED ");
+        var ze_item = "<u>" + enchantMeFormatted + item.replaceAll("_", " ").toUpperCase() + " x" + stack.replaceAll(",", "") + "</u> AT SLOT <u>" + locationString + " | Additional NBT: " + nbtmeFormatted + "</u>";
+        console.log(ze_item);
+        display_list += "<span id='" + ze_item + "'>" + ze_item + "</span><br>";
 
         document.getElementById("items").value = "";
         document.getElementById("item_loc").value = "";
@@ -54,6 +55,7 @@ function addItem() {
         document.getElementById("display_list").innerHTML = display_list;
     }
 }
+
 
 
 function updateCommand() {
