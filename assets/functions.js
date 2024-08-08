@@ -8,6 +8,23 @@ function addItem() {
     let nbt = document.getElementById("nbt").value;
     let stack = "," + document.getElementById("item_stack").value;
 
+    const ranges = stack.split(', ');
+
+    const numberList = [];
+
+    ranges.forEach(item => {
+        if (item.includes('-')) {
+            const [start, end] = item.split('-').map(Number);
+            for (let i = start; i <= end; i++) {
+                numberList.push(i);
+            }
+        } else {
+            numberList.push(Number(item));
+        }
+    });
+
+    console.log(numberList);
+
     if (item == "") {
         document.getElementById("action").innerHTML = "Missing Item Name!";
     } else if (location == "") {
