@@ -49,7 +49,7 @@ function updateCommand() {
 function copyCommand() {
     let output = document.getElementById("output");
     navigator.clipboard.writeText(output.innerHTML);
-    alert("Copied your command to clipboard!" + output.innerHTML);
+    document.getElementById("copied").innerHTML = "Successfully copied '" + output.innerHTML + "'.";
 }
 
 setInterval(updateCommand, 500);
