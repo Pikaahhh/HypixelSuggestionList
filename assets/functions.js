@@ -40,10 +40,10 @@ function addItem() {
         }
 
         locationList.forEach(loc => {
-            item_list += item + nbtme + enchantMe + ":" + loc + stack + "%%";
+            item_list += item + nbtme + enchantMe + ":[" + loc + "]" + stack + "%%";
             let nbtmeFormatted = nbtme.replaceAll(",", "").replaceAll("", "None!");
             let enchantMeFormatted = enchantMe.replaceAll(",enchant", "ENCHANTED ");
-            var ze_item = "<u>" + enchantMeFormatted + item.replaceAll("_", " ").toUpperCase() + " x" + stack.replaceAll(",", "") + "</u> AT SLOT <u>" + loc + " | Additional NBT: " + nbtmeFormatted + "</u>";
+            var ze_item = "<u>" + enchantMeFormatted + item.replaceAll("_", " ").toUpperCase() + " x" + stack.replaceAll(",", "") + "</u> AT SLOT <u>[" + loc + "] | Additional NBT: " + nbtmeFormatted + "</u>";
             console.log(ze_item);
             display_list += "<span id='" + ze_item + "'>" + ze_item + "</span><br>";
         });
@@ -54,6 +54,7 @@ function addItem() {
         document.getElementById("display_list").innerHTML = display_list;
     }
 }
+
 
 function updateCommand() {
     let output = document.getElementById("output");
