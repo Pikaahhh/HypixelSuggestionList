@@ -10,7 +10,7 @@ body {
     font-weight: 500;
     margin: 0;
     height: 100vh;
-    background: radial-gradient(farthest-side at 50% 25%, rgba(151, 151, 151, 0.5) 0%, #191919 75%), url('nerds-2023.png') center/cover;
+    background: radial-gradient(farthest-side at 50% 25%, rgba(151, 151, 151, 0.5) 0%, #191919 75%), url('https://hypixel.net/attachments/nerds1-png.3347462/') center/cover;
     background-position: 25% 250%;
 }
 
