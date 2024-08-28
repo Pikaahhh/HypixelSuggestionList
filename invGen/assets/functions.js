@@ -107,8 +107,8 @@ function updateCommand() {
 }
 
 function copyCommand() {
-    let output = document.getElementById("output");
-    navigator.clipboard.writeText(output.innerHTML);
+    let output = document.getElementById("output").innerHTML;
+    navigator.clipboard.writeText(output);
     alert(output);
 }
 
