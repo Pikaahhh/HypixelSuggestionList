@@ -102,7 +102,7 @@ function updateCommand() {
         var view_type = "False";
     }
 
-    output.innerHTML = "/gen2 inventory rows:" + size + " slots_per_row:9 container_name:" + container_name + " draw_border:True show_publicly:" + view_type + " inventory_string:" 
+    output.innerHTML = "/gen2 inventory rows:" + size + " slots_per_row:9 container_name:" + container_name + " draw_border:True hidden:" + view_type + " inventory_string:" 
     + item_list;
 }
 
